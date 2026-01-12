@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Products</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">નામકરણ કરી દેવું</div>
+        <ul class="nav-links">
+            <!-- <li><a href="#" class="active">Home</a></li> -->
+            <li><a href="{% url 'product' %}">Products</a></li>
+            <li><a href="#">Categories</a></li>
+            <!-- <li><a href="#">Contact</a></li> -->
+        </ul>
+    </nav>
+    <div>
+        <ul class="message">
+            {% for message in messages %}
+            <script>alert('{{ message }}')</script>
+            {% endfor %}
+        </ul>
+     </div>
+    <h1>Product Management</h1>
+    <button class="add-btn" onclick="openAddForm()">+ Add New Product</button>
+
+    <div class="products" id="productList"></div>
+
+
+        <div class="overlay" id="overlay">
+            <div class="form-box">
+                <h3 id="formTitle">Product Details</h3>
+                    <form id="productForm" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input id="name" placeholder="Product Name" name="p_name">
+                        <input type="hidden" class="form-control" name="p_id" id="id">
+                        <select id="category" onchange="updateSub()" name="p_category">
+                        <option value="">Category</option>
+                            {% for cat in category %}
+                            <option value="{{ cat.CategoryName }}">{{ cat.CategoryName }}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="subcategory" name="p_subcategory">
+                            <option value="">Select Category First</option>
+                        </select>
+                        <textarea id="desc" placeholder="Description" rows="3" name="p_desc"></textarea>
+                        <input id="price" type="number" placeholder="Price" name="p_price">
+                        <input id="image" type="file" name="p_image">
+
+<!--                        <button class="submit" type="submit">Save Product</button>-->
+                        <button class="submit" onclick="saveProduct()">Save Product</button>
+                        <button class="cancel" onclick="closeForm()">Cancel</button>
+                    </form>
+            </div>
+        </div>
+
+<script src="{% static 'js/script.js' %}" ></script>
+
+</body>
+</html>

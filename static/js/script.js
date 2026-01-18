@@ -210,6 +210,12 @@ const pId = document.getElementById("id");
             container.scrollLeft += scrollAmount;
         }
     }
+    function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    if (navLinks) {
+        navLinks.classList.toggle("active");
+    }
+}
 
 /* =========================================
    4. CATEGORY PAGE LOGIC
@@ -314,4 +320,8 @@ function deleteSub(event, subid) {
     if(confirm("Remove this sub-category?")) {
         window.location.href = `/delete_subcategory?id=${subid}`;
     }
+}
+
+function closeModal() {
+    document.getElementById("overlay").style.display = "none";
 }

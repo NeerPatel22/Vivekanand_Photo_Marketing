@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar">
         <div class="logo">MyStore</div>
-        <div class="menu-toggle" onclick="toggleMenu()">
+        <div class="menu-toggle" onclick="toggleMenu();">
             <i class="fas fa-bars"></i>
         </div>
         <ul class="nav-links" id="navLinks">
@@ -23,20 +23,20 @@
     <div>
         <ul class="message">
             {% for message in messages %}
-            <script>alert('{{ message }}')</script>
+            <script>alert('{{ message }}');</script>
             {% endfor %}
         </ul>
      </div>
     <h1>Product Management</h1>
 
      <div class="filter-wrapper">
-        <button class="scroll-arrow arrow-left" onclick="scrollFilter('left')"><i class="fas fa-chevron-left"></i></button>
+        <button class="scroll-arrow arrow-left" onclick="scrollFilter('left');"><i class="fas fa-chevron-left"></i></button>
         <div class="filter-scroll-container" id="filterContainer">
             </div>
-        <button class="scroll-arrow arrow-right" onclick="scrollFilter('right')"><i class="fas fa-chevron-right"></i></button>
+        <button class="scroll-arrow arrow-right" onclick="scrollFilter('right');"><i class="fas fa-chevron-right"></i></button>
     </div>
 
-    <button class="add-btn" onclick="openAddForm()">+ Add New Product</button>
+    <button class="add-btn" onclick="openAddForm();">+ Add New Product</button>
 
     <div class="products" id="productList"></div>
 
@@ -48,7 +48,7 @@
                         {% csrf_token %}
                         <input id="name" placeholder="Product Name" name="p_name">
                         <input type="hidden" class="form-control" name="p_id" id="id">
-                        <select id="category" onchange="updateSub()" name="p_category">
+                        <select id="category" onchange="updateSub();" name="p_category">
                         <option value="">Category</option>
                             {% for cat in categories %}
                             <option value="{{ cat.id }}">{{ cat.CategoryName }}</option>
@@ -62,8 +62,8 @@
                         <input id="image" type="file" name="p_image">
 
 <!--                        <button class="submit" type="submit">Save Product</button>-->
-                        <button class="submit" onclick="saveProduct()">Save Product</button>
-                        <button class="cancel" onclick="closeForm()">Cancel</button>
+                        <button class="submit" onclick="saveProduct();">Save Product</button>
+                        <button class="cancel" onclick="closeForm();">Cancel</button>
                     </form>
             </div>
         </div>

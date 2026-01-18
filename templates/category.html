@@ -15,7 +15,7 @@
 
     <nav class="navbar">
         <div class="logo">MyStore</div>
-        <div class="menu-toggle">
+        <div class="menu-toggle" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </div>
         <ul class="nav-links" id="navLinks">
@@ -65,7 +65,7 @@
                 <input name="subcategory_name" placeholder="Enter Sub-category Name" required>
                 <button type="submit" class="submit">Save Sub-category</button>
             </form>
-            <button class="cancel" onclick="closeModal()">Cancel</button>
+            <button class="cancel" onclick="closeModal();">Cancel</button>
         </div>
     </div>
 <script src="{% static 'js/script.js' %}" defer></script>

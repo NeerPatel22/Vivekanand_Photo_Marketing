@@ -29,13 +29,13 @@ class Category(models.Model):
     CategoryName = models.CharField(max_length=100)
 
 class SubCategory(models.Model):
-    CategoryName = models.CharField(max_length=100)
+    CategoryName = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='subs')
     SubCategoryName = models.CharField(max_length=100)
 
 class Product(models.Model):
     ProductName = models.CharField(max_length=100)
-    CategoryName = models.CharField(max_length=100)
-    SubCategoryName = models.CharField(max_length=100)
+    CategoryName = models.ForeignKey(Category, on_delete=models.CASCADE,null=True, related_name='products')
+    SubCategoryName = models.ForeignKey(SubCategory, on_delete=models.CASCADE,null=True, related_name='products')
     ProductDescription = models.TextField()
     ProductPrice = models.CharField(max_length=50)
     ProductImage = models.ImageField(upload_to=rename_image, null=True, blank=True)

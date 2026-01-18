@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Products</title>
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="logo">નામકરણ કરી દેવું</div>
-        <ul class="nav-links">
-            <!-- <li><a href="#" class="active">Home</a></li> -->
-            <li><a href="{% url 'product' %}">Products</a></li>
-            <li><a href="#">Categories</a></li>
-            <!-- <li><a href="#">Contact</a></li> -->
+        <div class="logo">MyStore</div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{% url 'product' %}" class="active">Products</a></li>
+            <li><a href="{% url 'category' %}">Categories</a></li>
         </ul>
     </nav>
     <div>
@@ -26,6 +28,14 @@
         </ul>
      </div>
     <h1>Product Management</h1>
+
+     <div class="filter-wrapper">
+        <button class="scroll-arrow arrow-left" onclick="scrollFilter('left')"><i class="fas fa-chevron-left"></i></button>
+        <div class="filter-scroll-container" id="filterContainer">
+            </div>
+        <button class="scroll-arrow arrow-right" onclick="scrollFilter('right')"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
     <button class="add-btn" onclick="openAddForm()">+ Add New Product</button>
 
     <div class="products" id="productList"></div>
@@ -40,8 +50,8 @@
                         <input type="hidden" class="form-control" name="p_id" id="id">
                         <select id="category" onchange="updateSub()" name="p_category">
                         <option value="">Category</option>
-                            {% for cat in category %}
-                            <option value="{{ cat.CategoryName }}">{{ cat.CategoryName }}</option>
+                            {% for cat in categories %}
+                            <option value="{{ cat.id }}">{{ cat.CategoryName }}</option>
                             {% endfor %}
                         </select>
                         <select id="subcategory" name="p_subcategory">

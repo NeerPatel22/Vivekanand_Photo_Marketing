@@ -1,0 +1,21 @@
+name: Deploy to PythonAnywhere
+
+on:
+  push:
+    branches:
+      - main  # This triggers the deploy whenever you push to 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploying via API
+        run: |
+          # This command tells PythonAnywhere to run your deploy.sh script
+          curl -H "Authorization: Token ${{ secrets.PA_API_TOKEN }}" \
+               -X POST "https://www.pythonanywhere.com/api/v0/user/${{ secrets.PA_USERNAME }}/consoles/" \
+               -d "executable=bash&arguments=~/deploy.sh"
+          
+          # This command reloads your web app so the changes go live
+          curl -H "Authorization: Token ${{ secrets.PA_API_TOKEN }}" \
+               -X POST "https://www.pythonanywhere.com/api/v0/user/${{ secrets.PA_USERNAME }}/webapps/${{ secrets.PA_DOMAIN }}/reload/"

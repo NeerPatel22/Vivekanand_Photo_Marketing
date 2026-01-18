@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category Management</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MyStore</div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{% url 'product' %}">Products</a></li>
+            <li><a href="{% url 'category' %}" class="active">Categories</a></li>
+        </ul>
+    </nav>
+
+    <br>
+    <div>
+        <ul class="message">
+            {% for message in messages %}
+            <script>alert('{{ message }}')</script>
+            {% endfor %}
+        </ul>
+     </div>
+    <h1>Manage Categories</h1>
+
+    <div class="action-bar">
+        <button class="btn btn-primary" onclick="openCategoryModal()">
+            <i class="fas fa-plus"></i> Add Category
+        </button>
+        <button class="btn btn-secondary" onclick="openSubCategoryModal()">
+            <i class="fas fa-layer-group"></i> Add Sub-category
+        </button>
+    </div>
+
+    <div class="category-grid" id="categoryList"></div>
+
+    <div class="overlay" id="overlay">
+        <div class="form-box">
+            <h3 id="modalTitle">Add Item</h3>
+
+            <form id="categoryForm" action="{% url 'add_category' %}" method="POST" style="display:none;">
+                {% csrf_token %}
+                <input name="c_name" placeholder="Enter Category Name" required>
+                <button type="submit" class="submit">Save Category</button>
+            </form>
+
+            <form id="subCategoryForm" action="{% url 'add_subcategory' %}" method="POST" style="display:none;">
+                {% csrf_token %}
+                <div id="parentSelectContainer">
+                    <label style="font-size:12px; color:#666;">Select Parent Category:</label>
+                    <select id="parentCategorySelect" name="parent_id" required></select>
+                </div>
+                <br>
+                <input name="subcategory_name" placeholder="Enter Sub-category Name" required>
+                <button type="submit" class="submit">Save Sub-category</button>
+            </form>
+            <button class="cancel" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+<script src="{% static 'js/script.js' %}" defer></script>
+</body>
+</html>

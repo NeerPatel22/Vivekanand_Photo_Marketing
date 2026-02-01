@@ -43,6 +43,9 @@ const pId = document.getElementById("id");
         }
     }
 
+/* =========================================
+    PRODUCT PAGE LOGIC
+========================================= */
     function initProductPage() {
         renderFilters();
         renderProducts();
@@ -219,7 +222,7 @@ const pId = document.getElementById("id");
 
 /* =========================================
    4. CATEGORY PAGE LOGIC
-   ========================================= */
+========================================= */
 
 // Variables specific to Category Page
 let isAddingSub = false;

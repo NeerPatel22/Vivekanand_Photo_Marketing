@@ -12,6 +12,11 @@ import math
 import random
 # Create your views here.
 
+
+def index(request):
+    return render(request, 'index.html')
+
+
 def product(request):
     categories = Category.objects.all()
     return render(request, 'product.html',{'categories':categories})

@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyStore - Shop</title>
+<link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">Vivekanand Photo Marketing<span></span></a>
+
+        <!-- <ul class="nav-center" id="navLinks">
+            <li><a href="#" class="nav-link active">Home</a></li>
+            <li><a href="#productsGrid" class="nav-link">Shop</a></li>
+            <li><a href="#filterContainer" class="nav-link">Categories</a></li>
+            <li><a href="#" class="nav-link">New Arrivals</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="icon-btn" onclick="document.getElementById('searchInput').focus()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="icon-btn" onclick="alert('Cart details coming soon!')">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+            
+            <div class="menu-toggle" onclick="toggleUserMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div> -->
+    </nav>
+
+    <div class="slider-container">
+        <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1600&q=80" alt="Tech">
+            <div class="slide-content">
+                <h2>Next Gen Technology</h2>
+                <p>Upgrade your life with the latest gadgets and accessories.</p>
+                <a href="#productsGrid" class="slide-btn">Shop Electronics</a>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80" alt="Fashion">
+            <div class="slide-content">
+                <h2>New Season Fashion</h2>
+                <p>Discover the trends that are taking over the streets.</p>
+                <a href="#productsGrid" class="slide-btn">Shop Fashion</a>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1600&q=80" alt="Home">
+            <div class="slide-content">
+                <h2>Modern Living</h2>
+                <p>Transform your space with our premium home decor.</p>
+                <a href="#productsGrid" class="slide-btn">Shop Home</a>
+            </div>
+        </div>
+
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <div class="search-wrapper">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search for products..." onkeyup="searchProducts()">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div class="filter-section" id="filterContainer">
+        <button class="filter-btn active" onclick="filterCategory('all', this)">All Products</button>
+    </div>
+
+    <div class="container">
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-left"><img id="modalImg" src="" alt=""></div>
+            <div class="modal-right">
+                <span id="modalCat" style="color:#2563EB; font-weight:600; font-size:14px; margin-bottom:10px;"></span>
+                <h2 id="modalTitle" style="margin:0 0 15px;"></h2>
+                <p id="modalDesc" style="color:#64748b; margin-bottom:20px;"></p>
+                <h3 id="modalPrice" style="font-size:32px; margin:0 0 20px;"></h3>
+                <!-- <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button> -->
+            </div>
+        </div>
+    </div>
+
+<script src="{% static 'js/script_index.js' %}">
+</script>
+</body>
+</html>

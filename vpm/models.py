@@ -1,5 +1,3 @@
-from tkinter import image_names
-
 from django.db import models
 import os
 from uuid import uuid4
@@ -7,9 +5,6 @@ from django.utils.text import slugify
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
-import datetime
-from django.db.models.signals import pre_save, post_delete
-from django.dispatch import receiver
 
 def rename_image(instance, filename):
     ext = filename.split('.')[-1]

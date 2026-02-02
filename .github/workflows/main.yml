@@ -1,21 +1,28 @@
-name: Deploy to PythonAnywhere
+name: Django Deploy to Oracle Cloud
 
 on:
   push:
     branches:
       - master  # This triggers the deploy whenever you push to 'main'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploying via API
-        run: |
-          # This command tells PythonAnywhere to run your deploy.sh script
-          curl -H "Authorization: Token ${{ secrets.PA_API_TOKEN }}" \
-               -X POST "https://www.pythonanywhere.com/api/v0/user/${{ secrets.PA_USERNAME }}/consoles/" \
-               -d "executable=bash&arguments=~/deploy.sh"
-          
-          # This command reloads your web app so the changes go live
-          curl -H "Authorization: Token ${{ secrets.PA_API_TOKEN }}" \
-               -X POST "https://www.pythonanywhere.com/api/v0/user/${{ secrets.PA_USERNAME }}/webapps/${{ secrets.PA_DOMAIN }}/reload/"
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to OCI via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/Vivekanand_Photo_Marketing
+            git pull origin master
+            source venv/bin/activate
+            pip install -r requirements.txt
+            python manage.py makemigrations 
+            python manage.py migrate
+            python manage.py collectstatic --noinput
+            sudo systemctl restart gunicorn
